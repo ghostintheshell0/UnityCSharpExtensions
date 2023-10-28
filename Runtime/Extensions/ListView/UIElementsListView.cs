@@ -15,21 +15,17 @@ namespace Extensions
         public string ContainerSelector;
         private VisualElement _container;
 
-        protected override void Disable(V view)
-        {
-            view.style.display = DisplayStyle.None;
-            view.parent.Insert(view.parent.childCount-1, view);
-        }
 
         protected override void Enable(V view)
         {
+            view.parent.Insert(view.parent.childCount-1, view);
             view.style.display = DisplayStyle.Flex;
         }
 
-        protected override void InitView(V view)
+        protected override void Disable(V view)
         {
+            view.style.display = DisplayStyle.None;
         }
-
         protected override V InstantiateView()
         {
             var result = new V();
@@ -38,7 +34,7 @@ namespace Extensions
             return result;
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             var root = Document.rootVisualElement;
 

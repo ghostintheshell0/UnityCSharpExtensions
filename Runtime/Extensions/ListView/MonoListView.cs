@@ -28,10 +28,6 @@ namespace Extensions
             SelectionChanged?.Invoke(view.Item);
         }
 
-        protected override void InitView(V view)
-        {
-        }
-
         protected override void Enable(V view)
         {
             view.transform.SetAsLastSibling();

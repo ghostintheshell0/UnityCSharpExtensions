@@ -13,7 +13,7 @@ namespace Extensions
         {
             var view = GetOrCreateItem();
             _views.Add(item, view);
-            InitView(view);
+            Enable(view);
             view.Item = item;
         }
 
@@ -22,6 +22,7 @@ namespace Extensions
             var view = _views[item];
             _views.Remove(item);
             _pool.Add(view);
+            Disable(view);
         }
 
         public void Clear()
@@ -29,6 +30,7 @@ namespace Extensions
             foreach(var view in _views.Values)
             {
                 _pool.Add(view);
+                Disable(view);
             }
             _views.Clear();
         }
@@ -37,8 +39,6 @@ namespace Extensions
         {
             return _views[item];
         }
-
-        protected abstract void InitView(V view);
 
         private V GetOrCreateItem()
         {
